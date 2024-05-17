@@ -2,8 +2,10 @@
 using E_Shop.Categories.Dtos;
 using E_Shop.Images;
 using E_Shop.Manufacturers;
+using E_Shop.ProductImages.Dtos;
 using E_Shop.Products.Dtos;
 using E_Shop.Products.IServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,21 +26,18 @@ namespace E_Shop.Products
         private readonly IRepository<Product,Guid>  _productRepository;
         private readonly IRepository<Manufacturer,Guid> _manufacturerRepository;
         private readonly IRepository<Category,Guid> _categoryRepository;
-        private readonly IRepository<ProductImage, Guid> _productimageRepositoty;
-        private readonly IBlobContainer<ProductImageContainer> _blobContainer;
 
-        public ProductAppService(IRepository<Product, Guid> repository, 
+
+        public ProductAppService(
+            IRepository<Product, Guid> repository, 
             IRepository<Manufacturer, Guid> _manufacturerRepository, 
-            IRepository<Category, Guid> _categoryRepository,
-            IRepository<ProductImage, Guid> _productimageRepositoty,
-            IBlobContainer<ProductImageContainer> _blobContainer
+            IRepository<Category, Guid> _categoryRepository
             ) : base(repository)
         {
             _productRepository = repository;
             this._manufacturerRepository = _manufacturerRepository; 
             this._categoryRepository = _categoryRepository;
-            this._blobContainer = _blobContainer;
-            this._productimageRepositoty = _productimageRepositoty;
+            
         }
 
         public override async Task<ProductDto> CreateAsync(CreateUpdateProduct input)
@@ -122,20 +121,7 @@ namespace E_Shop.Products
         }
 
 
-        public async Task SaveBytesAsync([FromForm] List<IFormFile> files, Guid WorkId)
-        {
-            Console.WriteLine(files);
-            foreach (var file in files)
-            {
-                using var memoryStream = new MemoryStream();
-                await file.CopyToAsync(memoryStream).ConfigureAwait(false);
-                var id = Guid.NewGuid();
-                var newFile = new Documents(id, file.FileName, WorkId, DateTime.Now, "hello", file.Length, file.ContentType);
-                var created = await _docrepository.InsertAsync(newFile);
-                ObjectMapper.Map<Documents, DocumentDto>(newFile);
-                await _blobContainer.SaveAsync(file.FileName, memoryStream.ToArray()).ConfigureAwait(false);
-            }
-        }
+       
 
 
 

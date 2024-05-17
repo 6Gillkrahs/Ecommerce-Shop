@@ -4,11 +4,16 @@ using E_Shop.Attributes;
 using E_Shop.Attributes.Dtos;
 using E_Shop.Categories;
 using E_Shop.Categories.Dtos;
+using E_Shop.ColorSizes;
+using E_Shop.ColorSizes.Dtos;
+using E_Shop.Images;
 using E_Shop.Manufacturers;
 using E_Shop.Manufacturers.Dtos;
+using E_Shop.ProductImages.Dtos;
 using E_Shop.Products;
 using E_Shop.Products.Dtos;
 using E_Shop.Reviews;
+
 
 namespace E_Shop;
 
@@ -44,5 +49,14 @@ public class E_ShopApplicationAutoMapperProfile : Profile
 
         CreateMap<Review, ReviewDto>().ReverseMap();
         CreateMap<CreateUpdateReviewDto, Review>().ReverseMap();
+
+
+        CreateMap<ProductImage, ProductImageDto>().ReverseMap();
+
+        CreateMap<ColorSize,ColorSizeDto>().ReverseMap();
+        CreateMap<CreateColorSizeDto, ColorSize>().ReverseMap();
+
+
+
     }
 }

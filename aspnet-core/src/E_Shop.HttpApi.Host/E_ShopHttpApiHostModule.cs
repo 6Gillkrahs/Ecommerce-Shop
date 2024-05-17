@@ -30,6 +30,7 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.BlobStoring.Minio;
+using Volo.Abp.BlobStoring;
 
 namespace E_Shop;
 
@@ -41,10 +42,12 @@ namespace E_Shop;
     typeof(E_ShopEntityFrameworkCoreModule),
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpAccountWebOpenIddictModule),
+    typeof(AbpBlobStoringMinioModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule)
 )]
-[DependsOn(typeof(AbpBlobStoringMinioModule))]
+    //[DependsOn(typeof(AbpBlobStoringMinioModule))]
+    //[DependsOn(typeof(AbpBlobStoringModule))]
     public class E_ShopHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -67,6 +70,7 @@ namespace E_Shop;
 
         ConfigureAuthentication(context);
         ConfigureBundles();
+        ConfigureBlob(context, configuration);
         ConfigureUrls(configuration);
         ConfigureConventionalControllers();
         ConfigureVirtualFileSystem(context);
@@ -96,6 +100,26 @@ namespace E_Shop;
             );
         });
     }
+
+    private void ConfigureBlob(ServiceConfigurationContext context, IConfiguration configuration)
+    {
+        Configure<AbpBlobStoringOptions>(options =>
+        {
+            options.Containers.ConfigureDefault(container =>
+            {
+                container.UseMinio(minio =>
+                {
+                    minio.EndPoint = configuration["minio:EndPoint"];
+                    minio.AccessKey = configuration["minio:AccessKey"];
+                    minio.SecretKey = configuration["minio:SecretKey"];
+                    minio.BucketName = configuration["minio:BucketName"];
+                    Console.WriteLine(minio);
+                });
+            });
+        });
+    }
+
+
 
     private void ConfigureUrls(IConfiguration configuration)
     {
@@ -140,6 +164,8 @@ namespace E_Shop;
             options.ConventionalControllers.Create(typeof(E_ShopApplicationModule).Assembly);
         });
     }
+
+
 
     private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
     {

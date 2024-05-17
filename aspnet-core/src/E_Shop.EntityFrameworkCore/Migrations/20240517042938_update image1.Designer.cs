@@ -4,6 +4,7 @@ using E_Shop.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace E_Shop.Migrations
 {
     [DbContext(typeof(E_ShopDbContext))]
-    partial class E_ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240517042938_update image1")]
+    partial class updateimage1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,41 +239,6 @@ namespace E_Shop.Migrations
                     b.ToTable("ESCategory", (string)null);
                 });
 
-            modelBuilder.Entity("E_Shop.ColorSizes.ColorSize", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("ColorSize_ID");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ColorSize_COLOR");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("ColorSize_PRODUCTID");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("ColorSize_QUANTITY");
-
-                    b.Property<int>("Size")
-                        .HasColumnType("int")
-                        .HasColumnName("ColorSize_SIZE");
-
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit")
-                        .HasColumnName("ColorSize_ISACTIVE");
-
-                    b.HasKey("Id")
-                        .HasName("SYS_211200932");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ESColorSize", (string)null);
-                });
-
             modelBuilder.Entity("E_Shop.Images.ProductImage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -325,8 +293,7 @@ namespace E_Shop.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("PRODUCTIMAGE_NAME");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier")
@@ -2413,15 +2380,6 @@ namespace E_Shop.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("E_Shop.ColorSizes.ColorSize", b =>
-                {
-                    b.HasOne("E_Shop.Products.Product", "Product")
-                        .WithMany("ColorSizes")
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("E_Shop.Images.ProductImage", b =>
                 {
                     b.HasOne("E_Shop.Products.Product", "Product")
@@ -2630,8 +2588,6 @@ namespace E_Shop.Migrations
 
             modelBuilder.Entity("E_Shop.Products.Product", b =>
                 {
-                    b.Navigation("ColorSizes");
-
                     b.Navigation("Reviews");
 
                     b.Navigation("productAttributes");

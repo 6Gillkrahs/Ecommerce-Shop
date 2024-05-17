@@ -1,5 +1,7 @@
 ﻿using E_Shop.Attributes;
 using E_Shop.Categories;
+using E_Shop.ColorSizes;
+using E_Shop.Images;
 using E_Shop.Manufacturers;
 using E_Shop.Reviews;
 using System;
@@ -25,7 +27,9 @@ namespace E_Shop.Products
         public Guid CategoryId { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<ProductAttribute> productAttributes { get; set; }
-       
+        public ICollection<ProductImage> productImages { get; set; }
+        public ICollection<ColorSize> ColorSizes { get; set; }
+
 
     }
 }

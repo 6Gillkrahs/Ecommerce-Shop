@@ -1,5 +1,7 @@
 ﻿using E_Shop.Attributes;
 using E_Shop.Categories;
+using E_Shop.ColorSizes;
+using E_Shop.Images;
 using E_Shop.Manufacturers;
 using E_Shop.Products;
 using E_Shop.Reviews;
@@ -39,6 +41,8 @@ public class E_ShopDbContext :
     public DbSet<Manufacturer> Manufaturers { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<ProductTag> ProductTags { get; set; }
+    public DbSet<ProductImage> ProductImages { get; set; }
+    public DbSet<ColorSize> ColorSizes { get; set; }
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
@@ -210,5 +214,38 @@ public class E_ShopDbContext :
 
             b.ConfigureByConvention();
         });
+        builder.Entity<ProductImage>(b =>
+        {
+            b.HasKey(x => x.Id).HasName("SYS_211200931");
+            b.ToTable(E_ShopConsts.DbTablePrefix + "ProductImage", E_ShopConsts.DbSchema);
+            b.Property(x => x.Id).HasColumnName("PRODUCTIMAGE_ID");
+            b.Property(x => x.Name).HasColumnName("PRODUCTIMAGE_NAME");
+            b.Property(x => x.ProductId).HasColumnName("PRODUCTIMAGE_PRODUCTID");
+            b.Property(x => x.Updateby).HasColumnName("PRODUCTIMAGE_UPDATEBY");
+            b.Property(x => x.FileSize).HasColumnName("PRODUCTIMAGE_FILESIZE");
+            b.HasOne(x => x.Product)
+            .WithMany(p => p.productImages)
+            .HasForeignKey(x => x.ProductId)
+            .IsRequired(false);
+            b.ConfigureByConvention();
+        });
+        builder.Entity<ColorSize>(b =>
+        {
+            b.HasKey(x => x.Id).HasName("SYS_211200932");
+            b.ToTable(E_ShopConsts.DbTablePrefix + "ColorSize", E_ShopConsts.DbSchema);
+            b.Property(x => x.Id).HasColumnName("ColorSize_ID");
+            b.Property(x => x.Color).HasColumnName("ColorSize_COLOR");
+            b.Property(x => x.ProductId).HasColumnName("ColorSize_PRODUCTID");
+            b.Property(x => x.Size).HasColumnName("ColorSize_SIZE");
+            b.Property(x => x.Quantity).HasColumnName("ColorSize_QUANTITY");
+            b.Property(x => x.isActive).HasColumnName("ColorSize_ISACTIVE");
+            b.HasOne(x => x.Product)
+            .WithMany(p => p.ColorSizes)
+            .HasForeignKey(x => x.ProductId)
+            .IsRequired(false);
+            b.ConfigureByConvention();
+        });
+
+
     }
 }
