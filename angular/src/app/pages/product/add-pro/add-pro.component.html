@@ -1,0 +1,84 @@
+<p-dialog [(visible)]="visible" header="Add Product" [modal]="true" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" (onHide)="appClose.emit()">
+    <form [formGroup]="formGroup">
+        <div class="p-fluid grid pt-4">
+            <div class="p-field col-12 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="code"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Code<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="name"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Name<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 lg:col-6">
+                <p-cascadeSelect formControlName="categoryId" [options]="categories" optionLabel="data.name"
+                    optionGroupLabel="data.name" [optionGroupChildren]="['children']" [style]="{ minWidth: '14rem' }"
+                    placeholder="Select a Category" />
+            </div>
+            <div class="p-field col-12 lg:col-6">
+                <p-dropdown [options]="manufacturers" formControlName="manufacturerId" optionLabel="name"
+                    placeholder="Select a Manufacturer" />
+            </div>
+            <div class="p-field col-12 pt-4 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="size"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Size<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 pt-4 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="color"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Color<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 pt-4 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="quantity"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Quantity<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 pt-4 lg:col-6">
+                <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                    (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" maxFileSize="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">
+                                {{ file.name }} - {{ file.size }} bytes
+                            </li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+    </form>
+    <ng-template pTemplate="paginatorright">
+        <!-- <div style="text-align:left">
+            <p-button label="Close" icon="pi pi-check" [loading]="isLoading" (onClick)="save()"/>
+        </div> -->
+        <div style="text-align:right">
+            <p-button label="Save" icon="pi pi-check" [loading]="isLoading" (onClick)="save()" />
+        </div>
+    </ng-template>
+
+
+</p-dialog>

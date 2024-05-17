@@ -1,0 +1,76 @@
+<p-toast />
+<p-confirmDialog />
+<div class="card">
+    <p-treeTable 
+    [value]="categories" 
+    [scrollable]="true" 
+    [tableStyle]="{'min-width':'50rem'}"
+    [paginator]="true" 
+    [rows]="10" 
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex flex-wrap gap-2 justify-content-between">
+          <p-button label="New" icon="pi pi-plus" styleClass="p-button-sm" (click)="showAddModal(null)"></p-button>
+  
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Slug</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+        <tr [ttRow]="rowNode">
+          <td>
+            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+            {{ rowData.name }}
+          </td>
+          <td>{{ rowData.code }} <i [class]="rowData.code"></i></td>
+          <td>{{ rowData.slug }} <i [class]="rowData.slug"></i></td>
+          <td>
+            <span class="p-buttonset">
+              <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-plus" pTooltip="New" (click)="showAddModal(rowData)"></button>
+              <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-pencil" pTooltip="Edit" (click)="showEditModal(rowData)"></button>
+              <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-trash" pTooltip="Delete" (click)="deleteMenu(rowData)"></button>
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <div style="text-align:left">
+            <p-button icon="pi pi-refresh" styleClass="p-button-text" (click)="getcategories()"/>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <div style="text-align:left">
+            <p-button icon="pi pi-download" styleClass="p-button-text" />
+        </div>
+      </ng-template>
+
+    </p-treeTable>
+  </div>
+
+  <ng-container *ngIf="addmodel">
+    <app-add-category
+        [display]="addmodel"
+        [IdRoot] = "idRoot"
+        (appClose)="addmodel = false"
+        [isLoading]="isLoading"
+    >
+  </app-add-category>
+
+  </ng-container>
+
+  <ng-container *ngIf="editmodel">
+    <app-edit-category
+        [display]="editmodel"
+        [IdRoot] = "idRoot"
+        (appClose)="editmodel = false"
+        [isLoading]="isLoading"
+    >
+  </app-edit-category>
+  
+  </ng-container>

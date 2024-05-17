@@ -1,0 +1,2 @@
+<button pButton pRipple type="button" [icon]="icon" style="height: 2rem" (click)="menu.toggle($event);dropdownItemsButton(data)" [pTooltip]="pTooltip"></button>
+<p-tieredMenu #menu [model]="items" [popup]="true" appendTo="body"></p-tieredMenu>

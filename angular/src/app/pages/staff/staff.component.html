@@ -1,0 +1,116 @@
+<p-toast />
+<p-confirmDialog />
+<div class="card">
+  <p-table #dt1 [value]="users" [tableStyle]="{ 'min-width': '250rem' }" styleClass="p-datatable-striped"
+    [paginator]="true" [rows]="5" [first]="skipCount" [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" [loading]="isLoading"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+    <ng-template pTemplate="caption">
+      <p-button pRipple  label="New" icon="pi pi-plus" class="mr-2" (click)="openNew()" />
+      <p-button pRipple  label="Delete" icon="pi pi-trash" (click)="deleteSelectedProducts()"
+        [disabled]="!selectedProducts || !selectedProducts.length" />
+      <div class="flex">
+        <p-iconField iconPosition="left" class="ml-auto">
+          <p-inputIcon>
+            <i class="pi pi-search"></i>
+          </p-inputIcon>
+          <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search keyword" />
+        </p-iconField>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 10%">
+          <p-tableHeaderCheckbox />
+        </th>
+        <th pSortableColumn="Username" style="width:20%">
+          Username <p-sortIcon field="Username" />
+        </th>
+        <th pSortableColumn="Email" style="width:20%">
+          Email <p-sortIcon field="Email" />
+        </th>
+        <th pSortableColumn="Role" style="width:20%">
+          Role <p-sortIcon field="Role" />
+        </th>
+        <th style="width:10%">
+          Action
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-users>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="users" />
+        </td>
+        <td>{{users.userName}}</td>
+        <td>{{users.email}}</td>
+        <td>{{users.role}}</td>
+        <td style="min-width: 20%;">
+          <app-cs-tiered-menu (buttonItem)="dropdownItemButton(users)" [items]="actionItems"></app-cs-tiered-menu>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+<p-dialog header="Detail User" [(visible)]="displayUserContainer" [modal]="true" [style]="{ width: '800px' }"
+  [draggable]="false" [resizable]="false">
+  <form [formGroup]="formGrou">
+    <div class="p-fluid grid pt-4">
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pinputtext="" formControlName="username"
+            class="p-inputtext p-component p-element p-filled" disabled>
+          <label for="float-input">Username<span class="required">*</span></label>
+        </span>
+      </div>
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input [disabled]="true"  type="text" pinputtext="" formControlName="name"
+            class="p-inputtext p-component p-element p-filled" id="disabled-input" >
+          <label for="float-input">Name<span class="required">*</span></label>
+        </span>
+      </div>
+
+      <div class="p-field pt-4 col-12 lg:col-6">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pinputtext="" formControlName="phone"
+            class="p-inputtext p-component p-element p-filled" disabled>
+          <label for="float-input">Phone Number<span class="required">*</span></label>
+        </span>
+      </div>
+
+      <div class="p-field pt-4 col-12 lg:col-6">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pinputtext="" formControlName="email"
+            class="p-inputtext p-component p-element p-filled " disabled>
+          <label for="float-input">Email<span class="required">*</span></label>
+        </span>
+      </div>
+
+
+      <div class="p-field pt-4 col-12 lg:col-6">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pinputtext="" formControlName="role"
+            class="p-inputtext p-component p-element p-filled" disabled>
+          <label for="float-input">Role<span class="required">*</span></label>
+        </span>
+      </div>
+
+      <div class="p-field pt-4 col-12 lg:col-6">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pinputtext="" formControlName="createAt"
+            class="p-inputtext p-component p-element p-filled" disabled>
+          <label for="float-input">Creation Time<span class="required">*</span></label>
+        </span>
+      </div>
+
+    </div>
+  </form>
+
+</p-dialog>

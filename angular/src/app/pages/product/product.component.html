@@ -1,0 +1,75 @@
+<p-toast />
+<p-confirmDialog />
+<div class="card">
+    <p-table #dt1 [value]="products" [tableStyle]="{ 'min-width': '250rem' }" styleClass="p-datatable-striped"
+    [paginator]="true" [rows]="5" [first]="skipCount" [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" [loading]="isLoading"
+    >
+        <ng-template pTemplate="caption">
+            <p-button pRipple  label="New" icon="pi pi-plus" class="mr-2" (click)="openNew()" />
+            <p-button pRipple  label="Delete" icon="pi pi-trash" (click)="deleteSelectedProducts()"
+            [disabled]="!selectedProducts || !selectedProducts.length" />
+            <div class="flex">
+            <p-iconField iconPosition="left" class="ml-auto">
+                <p-inputIcon>
+                <i class="pi pi-search"></i>
+                </p-inputIcon>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                placeholder="Search keyword" />
+            </p-iconField>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 10%">
+                <p-tableHeaderCheckbox />
+              </th>
+              <th pSortableColumn="Code" style="width:20%">
+                Code <p-sortIcon field="Username" />
+              </th>
+              <th pSortableColumn="Email" style="width:20%">
+                manufacturer <p-sortIcon field="Email" />
+              </th>
+              <th pSortableColumn="Role" style="width:20%">
+                Category <p-sortIcon field="Role" />
+              </th>
+              <th style="width:10%">
+                Action
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-products>
+            <tr>
+              <td>
+                <p-tableCheckbox [value]="products" />
+              </td>
+              <td>{{products.code}}</td>
+              <td>{{products.manufacturerName}}</td>
+              <td>{{products.categoryName}}</td>
+              <td style="min-width: 20%;">
+                <app-cs-tiered-menu (buttonItem)="dropdownItemButton(products)" [items]="actionItems"></app-cs-tiered-menu>
+              </td>
+            </tr>
+          </ng-template>
+    </p-table>
+</div>
+
+<ng-container *ngIf="addModel == true">
+  <app-add-pro
+    [visible]="addModel"
+    (appClose)="addModel == false"
+  >
+  </app-add-pro>
+</ng-container>
+
+<ng-container *ngIf="viewModel == true">
+  <app-detail-pro
+    [visible]="viewModel"
+    [product]="selectedProduct"
+    (appClose)="viewModel == false"
+  >
+
+  </app-detail-pro>
+</ng-container>

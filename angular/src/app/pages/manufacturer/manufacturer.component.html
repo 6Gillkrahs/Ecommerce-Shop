@@ -1,0 +1,89 @@
+<p-toast />
+<p-confirmDialog />
+<div class="card">
+  <p-table #dt1 [value]="manufacturers" [tableStyle]="{ 'min-width': '250rem' }" styleClass="p-datatable-striped"
+    [paginator]="true" [rows]="5" [first]="skipCount" [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" [loading]="isLoading"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+    <ng-template pTemplate="caption">
+      <p-button pRipple  label="New" icon="pi pi-plus" class="mr-2" (click)="onAdd()" />
+      <p-button pRipple  label="Delete" icon="pi pi-trash" (click)="deleteSelectedProducts()"
+        [disabled]="!selectedProducts || !selectedProducts.length" />
+      <div class="flex">
+        <p-iconField iconPosition="left" class="ml-auto">
+          <p-inputIcon>
+            <i class="pi pi-search"></i>
+          </p-inputIcon>
+          <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search keyword" />
+        </p-iconField>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 10%">
+          <p-tableHeaderCheckbox />
+        </th>
+        <th pSortableColumn="Name" style="width:20%">
+          Name <p-sortIcon field="Name" />
+        </th>
+        <th pSortableColumn="CODE" style="width:20%">
+          CODE <p-sortIcon field="CODE" />
+        </th>
+        <th pSortableColumn="Country" style="width:20%">
+          Country <p-sortIcon field="Country" />
+        </th>
+        <th style="width:10%">
+          Action
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-manufacturers>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="manufacturers" />
+        </td>
+        <td>{{manufacturers.name}}</td>
+        <td>{{manufacturers.code}}</td>
+        <td>{{manufacturers.country}}</td>
+        <td style="min-width: 20%;">
+          <app-cs-tiered-menu (buttonItem)="dropdownItemButton(manufacturers)" [items]="actionItems"></app-cs-tiered-menu>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <div style="text-align:left">
+          <p-button icon="pi pi-refresh" styleClass="p-button-text" (click)="getManufacturers()"/>
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-container *ngIf="detailModal == true">
+  <app-detail-manu
+    [visible]="detailModal"
+    [manufacturer]="selectedManufacturer"
+    (appClose)="detailModal = false"
+  >
+  </app-detail-manu>
+</ng-container>
+
+<ng-container *ngIf="addModal == true">
+  <app-add-manu
+    [visible]="addModal"
+    (appClose)="addModal = false"
+  > 
+  </app-add-manu>
+</ng-container>
+
+<ng-container *ngIf="editModal == true">
+  <app-edit-manu
+    [visible]="editModal"
+    [manufacturer]="selectedManufacturer"
+    (appClose)="editModal = false"
+  > 
+  </app-edit-manu>
+</ng-container>
+

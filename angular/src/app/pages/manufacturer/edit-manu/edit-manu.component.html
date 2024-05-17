@@ -1,0 +1,57 @@
+<p-dialog
+    [(visible)]="visible"
+    [modal]="true" 
+    header="Manufacturer Edit"
+    [style]="{ width: '50rem' }" 
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+    (onHide)="appClose.emit()"
+>
+
+<form [formGroup]="formGroup">
+    <div class="p-fluid grid pt-4">
+        <div class="p-field col-12 lg:col-4">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pinputtext="" formControlName="name"
+                    class="p-inputtext p-component p-element p-filled" required>
+                <label for="float-input">Name<span class="required">*</span></label>
+            </span>
+        </div>
+        <div class="p-field col-12 lg:col-4">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pinputtext="" formControlName="country"
+                    class="p-inputtext p-component p-element p-filled" required>
+                <label for="float-input">Country<span class="required">*</span></label>
+            </span>
+        </div>
+        <div class="p-field col-12 lg:col-4">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pinputtext="" formControlName="slug"
+                    class="p-inputtext p-component p-element p-filled" required>
+                <label for="float-input">Slug<span class="required">*</span></label>
+            </span>
+        </div>
+        <div class="p-field col-12 lg:col-6">
+            <label for="float-input">Active<span class="required">*</span></label>
+            <span class="p-float-label">
+                <p-toggleButton     formControlName="isActive" onLabel="Yes" offLabel="No"
+                    />
+            </span>
+        </div>
+        <div class="p-field col-12 lg:col-6">
+            <label for="float-input">Visibility<span class="required">*</span></label>
+            <span class="p-float-label">
+                <p-toggleButton  formControlName="visibility" onLabel="Yes" offLabel="No"
+                     />
+            </span>
+        </div>
+    </div>
+</form>
+<p-button 
+label="Save" 
+icon="pi pi-check" 
+[loading]="isLoading" 
+(onClick)="save()" />
+
+
+
+</p-dialog>

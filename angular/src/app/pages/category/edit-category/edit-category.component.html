@@ -1,0 +1,59 @@
+<p-dialog [(visible)]="display" (onHide)="appClose.emit()" header="Edit Category">
+    <form [formGroup]="formGroup">
+        <div class="p-fluid grid pt-4">
+            <div class="p-field col-12 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="name"
+                        class="p-inputtext p-component p-element p-filled" disabled>
+                    <label for="float-input">Name<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="slug" 
+                        class="p-inputtext p-component p-element p-filled" disabled>
+                    <label for="float-input">Slug<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 lg:col-4">
+                <span class="p-float-label">
+                    <p-inputNumber [(ngModel)]="sort"  [showButtons]="true" inputId="stacked"  formControlName="sortOrder"/>
+                    <label for="float-input">Sort<span class="required">*</span></label>
+                </span>
+            </div>
+        
+            <div class="p-field col-12 lg:col-4">
+                <label for="float-input">Active<span class="required">*</span></label>
+                <span class="p-float-label">
+                    <p-toggleButton [(ngModel)]="isActive" formControlName="isActive" onLabel="Yes" offLabel="No"
+                        />
+                </span>
+            </div>
+            <div class="p-field col-12 lg:col-4">
+                <label for="float-input">Visibility<span class="required">*</span></label>
+                <span class="p-float-label">
+                    <p-toggleButton [(ngModel)]="visibility" formControlName="visibility" onLabel="Yes" offLabel="No"
+                         />
+                </span>
+            </div>
+            <div class="p-field col-12">
+                <label for="float-input">SEO Meta Description<span class="required">*</span></label>
+                <span class="p-float-label">
+                    <textarea 
+                    rows="5"
+                    cols="30" 
+                    pInputTextarea 
+                    formControlName="seoMD" 
+                    [(ngModel)]="seo">
+                </textarea>
+                </span>
+            </div>
+        </div>
+    </form>
+
+    <p-button 
+    label="Save" 
+    icon="pi pi-check" 
+    [loading]="isLoading" 
+    (onClick)="save()" />
+</p-dialog>
