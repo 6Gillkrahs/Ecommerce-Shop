@@ -51,19 +51,15 @@ export class AddProComponent implements OnInit {
 
   productId: string;
   nameId: string = '733f199c-8f6d-dc7c-edbd-3a125959affa';
-  colorId: string = '591449d9-9052-f9b3-01f0-3a12595b8694';
-  quantityId: string = '71256daa-5ec8-3dcd-b3f3-3a128f128424';
-  priceId : string = '41d7a48b-c3f8-1b9c-fcc0-3a1298295d97';
+  descId : string = '36446411-0cae-812e-71b2-3a129c45eaaf'
 
 
   formGroup = new FormGroup({
     name: new FormControl(),
     categoryId: new FormControl(),
-    color: new FormControl(),
-    quantity: new FormControl(),
     sku: new FormControl(),
     manufacturerId: new FormControl(),
-    price : new FormControl()
+    desc : new FormControl()
   })
 
 
@@ -88,11 +84,9 @@ export class AddProComponent implements OnInit {
     this.formGroup = this.fb.group({
       name: [null, Validators.required],
       categoryId: [null, Validators.required],
-      color: [null, Validators.required],
-      quantity: [null, Validators.required],
       sku: [null, Validators.required],
       manufacturerId: [null, Validators.required],
-      price : [null,Validators.required]
+      desc: [null,Validators.required]
     })
   }
 
@@ -160,27 +154,11 @@ export class AddProComponent implements OnInit {
           }
           await this.productAttributeService.create(this.createProductAttribute).toPromise();
         }
-        if (item == "color") {
+        if (item == "desc") {
           this.createProductAttribute = {
             productId: product.id,
-            attributeId: this.colorId,
-            value: this.formGroup.value.color
-          }
-          await this.productAttributeService.create(this.createProductAttribute).toPromise();
-        }
-        if (item == "quantity") {
-          this.createProductAttribute = {
-            productId: product.id,
-            attributeId: this.quantityId,
-            value: this.formGroup.value.quantity.toString()
-          }
-          await this.productAttributeService.create(this.createProductAttribute).toPromise();
-        }
-        if (item == "price") {
-          this.createProductAttribute = {
-            productId: product.id,
-            attributeId: this.priceId,
-            value: this.formGroup.value.price.toString()
+            attributeId: this.descId,
+            value: this.formGroup.value.desc
           }
           await this.productAttributeService.create(this.createProductAttribute).toPromise();
         }

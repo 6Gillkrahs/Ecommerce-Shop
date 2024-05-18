@@ -6,6 +6,8 @@ import { ConfirmationService } from 'primeng/api';
 import { ProductAttributeDto } from '@proxy/attributes/dtos'
 import { ProductAttributeService } from '@proxy/attributes'
 
+
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -49,6 +51,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private readonly productService: ProductService,
+    private readonly comfirmService : ConfirmationService
   ) {
   }
 
@@ -87,6 +90,13 @@ export class ProductComponent implements OnInit {
         }
       },
       {
+        label: "Add items",
+        icon: "pi pi-plus-circle",
+        command : () => {
+          this.openadd(product)
+        }
+      },
+      {
         label: 'Edit',
         icon: 'pi pi-id-card',
         command: () => {
@@ -108,6 +118,10 @@ export class ProductComponent implements OnInit {
     this.addModel = true;
   }
 
+  openadd(product : ProductDto){
+
+  }
+
 
 
   onView(product: ProductDto) {
@@ -116,6 +130,17 @@ export class ProductComponent implements OnInit {
   }
 
   onDelete(product :  ProductDto){
+    this.comfirmService.confirm({
+      header:"Warning",
+      message: "You want to delete " + product.code + " from database? " ,
+      accept: ()=>{
+        this.delete(product)
+      }
+    })
+    
+  }
+
+  delete(product: ProductDto){
     this.productService.delete(product.id).subscribe({
       next: () => {
         this.getProducts()
