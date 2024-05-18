@@ -1,14 +1,8 @@
 
-<body style="display: flex; width: 100%;">
+<body>
     <app-header></app-header>
-   
-    <div id="content-wrapper" class="d-flex flex-column">
-        <div id="content">
-           <app-searchbar></app-searchbar>
-          
-            <router-outlet></router-outlet>
-            <p-toast></p-toast>
-        </div>
-    </div>
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
+    <app-footer></app-footer>
 </body>
 
