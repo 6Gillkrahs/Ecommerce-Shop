@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductDto } from '@proxy/products/dtos'
 import { ProductService } from '@proxy/products'
 import { PagedAndSortedResultRequestDto } from '@abp/ng.core';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductAttributeDto } from '@proxy/attributes/dtos'
 import { ProductAttributeService } from '@proxy/attributes'
 
@@ -42,6 +42,8 @@ export class ProductComponent implements OnInit {
 
   viewModel :  boolean = false;
 
+  addSizeModel : boolean = false;
+
   selectedProduct : ProductDto;
 
 
@@ -51,7 +53,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private readonly productService: ProductService,
-    private readonly comfirmService : ConfirmationService
+    private readonly comfirmService : ConfirmationService,
+    private readonly messageService : MessageService
   ) {
   }
 
@@ -65,13 +68,10 @@ export class ProductComponent implements OnInit {
       next: (product) => {
         this.products = product.items
         this.totalCount = product.totalCount
-        console.log(this.products)
       }
     })
 
   }
-
-  
 
   onPageChange(event) {
     this.skipCount = event.page * this.maxResultCount;
@@ -119,12 +119,13 @@ export class ProductComponent implements OnInit {
   }
 
   openadd(product : ProductDto){
-
+    this.addSizeModel = true;
+    this.selectedProduct = product;
   }
 
 
 
-  onView(product: ProductDto) {
+  onView(product: ProductDto) {   
     this.viewModel = true;
     this.selectedProduct = product;
   }
@@ -143,6 +144,7 @@ export class ProductComponent implements OnInit {
   delete(product: ProductDto){
     this.productService.delete(product.id).subscribe({
       next: () => {
+        this.messageService.add({severity:"success",summary:"Success",detail:"You have deleted successfylly!"})
         this.getProducts()
       }
     })

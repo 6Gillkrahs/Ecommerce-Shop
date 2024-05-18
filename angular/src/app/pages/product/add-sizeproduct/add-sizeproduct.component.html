@@ -1,0 +1,37 @@
+<p-dialog [(visible)]="visible" header="Add Size" [modal]="true" [style]="{ width: '20rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" (onHide)="appClose.emit()">
+
+    <form [formGroup]="formGroup">
+        <div class="p-fluid grid pt-4">
+            <div class="p-field col-12">
+                <span class="p-float-label">
+                    <p-dropdown [options]="size" formControlName="size" optionLabel="key" optionValue="value"
+                        placeholder="Select a Size" />
+                    <label for="float-input">Size<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field pt-4 col-12">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="color"
+                    class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Color<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field pt-4 col-12">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="quantity"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Quantity<span class="required">*</span></label>
+                </span>
+            </div>
+        </div>
+    </form>
+    <ng-template pTemplate="paginatorright">
+        <div class="flex justify-content-end gap-2">
+            <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+            <p-button label="Reset" severity="secondary" (click)="createForm()" />
+            <p-button label="Save" icon="pi pi-check" [loading]="isLoading" (onClick)="save()" />
+        </div>
+    </ng-template>
+
+</p-dialog>

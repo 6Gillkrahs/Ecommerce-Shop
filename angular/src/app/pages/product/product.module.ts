@@ -24,6 +24,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AddSizeproductComponent } from './add-sizeproduct/add-sizeproduct.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ProductComponent,
     AddProComponent,
     DetailProComponent,
-    EditProComponent
+    EditProComponent,
+    AddSizeproductComponent
   ],
   imports: [
     CommonModule,

@@ -16,8 +16,6 @@ import { CreateProductAttribute } from "@proxy/attributes/dtos"
 
 
 
-// import { UploadEvent } from 'primeng/fileupload';
-
 interface UploadEvent {
   originalEvent: Event;
   files: File[];
@@ -64,6 +62,7 @@ export class AddProComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.buildForm()
     this.getcategories()
     this.getmanufacturers()

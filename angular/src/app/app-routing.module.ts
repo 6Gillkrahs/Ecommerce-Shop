@@ -53,25 +53,13 @@ const routes: Routes = [
     ],
 
   },
-
-
- 
-  
-
-
-
-
-  // {
-  //   path: 'staff', 
-  //   component:AdminComponent,
-  //   loadChildren: () => 
-  //     import('./pages/staff/staff.module').then(m => m.StaffModule)
-  // },
-
-  // { path: 'staff', loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule) },
-
-
-
+  {
+    path: 'eshop', 
+    component:AdminComponent,
+    children: [
+      { path: 'home', loadChildren: () => import('./shop/home/home.module').then(m => m.HomeModule) },
+    ]
+  },
 
 ];
 

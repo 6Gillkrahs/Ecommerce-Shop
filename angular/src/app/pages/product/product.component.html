@@ -59,7 +59,7 @@
 <ng-container *ngIf="addModel == true">
   <app-add-pro
     [visible]="addModel"
-    (appClose)="addModel == false"
+    (appClose)="addModel = false"
   >
   </app-add-pro>
 </ng-container>
@@ -68,8 +68,19 @@
   <app-detail-pro
     [visible]="viewModel"
     [product]="selectedProduct"
-    (appClose)="viewModel == false"
+    (appClose)="viewModel = false"
   >
 
   </app-detail-pro>
 </ng-container>
+
+<ng-container *ngIf="addSizeModel == true">
+  <app-add-sizeproduct
+    [visible]="addSizeModel"
+    [product]="selectedProduct"
+    (appClose)="addSizeModel = false"
+  >
+
+  </app-add-sizeproduct>
+</ng-container>
+
