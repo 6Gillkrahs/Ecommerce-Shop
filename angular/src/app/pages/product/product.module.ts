@@ -23,6 +23,8 @@ import { EditProComponent } from './edit-pro/edit-pro.component';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
+import { InputNumberModule } from 'primeng/inputnumber';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     ConfirmDialogModule,
     CascadeSelectModule,
     DropdownModule,
-    FileUploadModule
+    FileUploadModule,
+    InputNumberModule
   ]
 })
 export class ProductModule { }

@@ -97,7 +97,7 @@ export class ProductComponent implements OnInit {
         label: 'Delete',
         icon: 'pi pi-user-minus',
         command: () => {
-          // this.onDelete(product)
+          this.onDelete(product)
         }
       }
     ]
@@ -113,6 +113,14 @@ export class ProductComponent implements OnInit {
   onView(product: ProductDto) {
     this.viewModel = true;
     this.selectedProduct = product;
+  }
+
+  onDelete(product :  ProductDto){
+    this.productService.delete(product.id).subscribe({
+      next: () => {
+        this.getProducts()
+      }
+    })
   }
 
 }
