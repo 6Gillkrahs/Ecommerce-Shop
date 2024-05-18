@@ -58,9 +58,11 @@ const routes: Routes = [
     component:AdminComponent,
     children: [
       { path: 'home', loadChildren: () => import('./shop/home/home.module').then(m => m.HomeModule) },
+      { path: 'list', loadChildren: () => import('./shop/listproduct/listproduct.module').then(m => m.ListproductModule) },
+
     ]
   },
-
+  
 ];
 
 @NgModule({
