@@ -55,7 +55,7 @@ h1 {
 
 h2 {
 	font-size: 36px;
-}
+}z
 
 h3 {
 	font-size: 30px;
@@ -1201,17 +1201,17 @@ ol {
 	height: 100%;
 }
 
-.shop__sidebar__accordion .card {
+.shop__sidebar__accordion .card1 {
 	border: none;
 	border-radius: 0;
 	margin-bottom: 25px;
 }
 
-.shop__sidebar__accordion .card:last-child {
+.shop__sidebar__accordion .card1:last-child {
 	margin-bottom: 0;
 }
 
-.shop__sidebar__accordion .card:last-child .card-body {
+.shop__sidebar__accordion .card1:last-child .card-body {
 	padding-bottom: 0;
 	border-bottom: none;
 }
