@@ -12,5 +12,6 @@ namespace E_Shop.Products.IServices
     {
         Task<PagedResultDto<ProductDto>> getAllByManufacturerId(Guid manufacturerId);
         Task<ListResultDto<CategoryLookupDto>> getCategoryLookupAsync();
+
     }
 }

@@ -45,8 +45,8 @@ namespace E_Shop.ProductImages
                 await file.CopyToAsync(memoryStream).ConfigureAwait(false);
                 var id = Guid.NewGuid();
                 var newFile = new ProductImage(id, file.FileName, productId, "hello", file.Length);
-                //var created = await _productimageRepositoty.InsertAsync(newFile);
-                //ObjectMapper.Map<ProductImage, ProductImageDto>(newFile);
+                var created = await _productimageRepositoty.InsertAsync(newFile);
+                ObjectMapper.Map<ProductImage, ProductImageDto>(newFile);
                 await _blobContainer.SaveAsync(file.FileName, memoryStream.ToArray());
             }
         }
