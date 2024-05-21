@@ -6,6 +6,8 @@ using E_Shop.Categories;
 using E_Shop.Categories.Dtos;
 using E_Shop.ColorSizes;
 using E_Shop.ColorSizes.Dtos;
+using E_Shop.Documents;
+using E_Shop.Documents.Dtos;
 using E_Shop.Images;
 using E_Shop.Manufacturers;
 using E_Shop.Manufacturers.Dtos;
@@ -56,6 +58,7 @@ public class E_ShopApplicationAutoMapperProfile : Profile
         CreateMap<ColorSize,ColorSizeDto>().ReverseMap();
         CreateMap<CreateColorSizeDto, ColorSize>().ReverseMap();
 
+        CreateMap<Document, DocumentDto>().ReverseMap();
 
 
     }

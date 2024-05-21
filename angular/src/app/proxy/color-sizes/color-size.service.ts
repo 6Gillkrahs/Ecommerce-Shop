@@ -35,6 +35,14 @@ export class ColorSizeService {
     { apiName: this.apiName,...config });
   
 
+  getColorSizesByProductIdByProductId = (productId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ColorSizeDto[]>({
+      method: 'GET',
+      url: `/api/app/color-size/color-sizes-by-product-id/${productId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<ColorSizeDto>>({
       method: 'GET',

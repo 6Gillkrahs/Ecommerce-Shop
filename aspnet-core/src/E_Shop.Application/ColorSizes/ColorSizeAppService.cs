@@ -15,6 +15,13 @@ namespace E_Shop.ColorSizes
     {
         public ColorSizeAppService(IRepository<ColorSize, Guid> repository) : base(repository)
         {
+
+        }
+
+        public async Task<List<ColorSizeDto>> GetColorSizesByProductId(Guid productId)
+        {
+            var colorSizes = await Repository.GetListAsync(x => x.ProductId == productId);
+            return ObjectMapper.Map<List<ColorSize>, List<ColorSizeDto>>(colorSizes);
         }
     }
 }

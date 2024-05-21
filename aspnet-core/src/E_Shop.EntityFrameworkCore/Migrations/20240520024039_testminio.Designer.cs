@@ -4,6 +4,7 @@ using E_Shop.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace E_Shop.Migrations
 {
     [DbContext(typeof(E_ShopDbContext))]
-    partial class E_ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240520024039_testminio")]
+    partial class testminio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,7 +308,8 @@ namespace E_Shop.Migrations
                         .HasColumnName("ExtraProperties");
 
                     b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("FILESIZE");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -323,13 +327,29 @@ namespace E_Shop.Migrations
 
                     b.Property<string>("MimeType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("MIMETYPE");
 
-                    b.Property<Guid?>("TenantId")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("NAME");
+
+                    b.Property<string>("UpdateBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("UPDATEBY");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UPDATEDATE");
+
+                    b.Property<Guid>("WorkId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("TenantId");
+                        .HasColumnName("WORKID");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("SYS_C435324523812");
 
                     b.ToTable("ESDocument", (string)null);
                 });

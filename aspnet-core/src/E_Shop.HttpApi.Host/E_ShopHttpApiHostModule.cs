@@ -44,11 +44,12 @@ namespace E_Shop;
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpBlobStoringMinioModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+    typeof(AbpSwashbuckleModule),
+    typeof(AbpBlobStoringMinioModule)
 )]
-    //[DependsOn(typeof(AbpBlobStoringMinioModule))]
-    //[DependsOn(typeof(AbpBlobStoringModule))]
-    public class E_ShopHttpApiHostModule : AbpModule
+//[DependsOn(typeof(AbpBlobStoringMinioModule))]
+//[DependsOn(typeof(AbpBlobStoringModule))]
+public class E_ShopHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -70,12 +71,26 @@ namespace E_Shop;
 
         ConfigureAuthentication(context);
         ConfigureBundles();
-        ConfigureBlob(context, configuration);
+        //ConfigureBlob(context, configuration);
         ConfigureUrls(configuration);
         ConfigureConventionalControllers();
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+        Configure<AbpBlobStoringOptions>(options =>
+        {
+            options.Containers.ConfigureDefault(container =>
+            {
+                container.UseMinio(minio =>
+                {
+                    minio.EndPoint = configuration["minio:EndPoint"];
+                    minio.AccessKey = configuration["minio:AccessKey"];
+                    minio.SecretKey = configuration["minio:SecretKey"];
+                    minio.BucketName = configuration["minio:BucketName"];
+                    Console.WriteLine(minio);
+                });
+            });
+        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)

@@ -1,6 +1,7 @@
 ﻿using E_Shop.Attributes;
 using E_Shop.Categories;
 using E_Shop.ColorSizes;
+using E_Shop.Documents;
 using E_Shop.Images;
 using E_Shop.Manufacturers;
 using E_Shop.Products;
@@ -43,6 +44,8 @@ public class E_ShopDbContext :
     public DbSet<ProductTag> ProductTags { get; set; }
     public DbSet<ProductImage> ProductImages { get; set; }
     public DbSet<ColorSize> ColorSizes { get; set; }
+    public DbSet<Document> Documents { get; set; }
+
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
@@ -245,7 +248,11 @@ public class E_ShopDbContext :
             .IsRequired(false);
             b.ConfigureByConvention();
         });
-
+        builder.Entity<Document>(b =>
+        {
+            b.ToTable(E_ShopConsts.DbTablePrefix + "Document", E_ShopConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
 
     }
 }

@@ -2317,6 +2317,23 @@
               "name": "IColorSizeAppService",
               "methods": [
                 {
+                  "name": "GetColorSizesByProductId",
+                  "parametersOnMethod": [
+                    {
+                      "name": "productId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<E_Shop.ColorSizes.Dtos.ColorSizeDto>",
+                    "typeSimple": "[E_Shop.ColorSizes.Dtos.ColorSizeDto]"
+                  }
+                },
+                {
                   "name": "GetAsync",
                   "parametersOnMethod": [
                     {
@@ -2413,6 +2430,43 @@
             }
           ],
           "actions": {
+            "GetColorSizesByProductIdByProductId": {
+              "uniqueName": "GetColorSizesByProductIdByProductId",
+              "name": "GetColorSizesByProductId",
+              "httpMethod": "GET",
+              "url": "api/app/color-size/color-sizes-by-product-id/{productId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "productId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "productId",
+                  "name": "productId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<E_Shop.ColorSizes.Dtos.ColorSizeDto>",
+                "typeSimple": "[E_Shop.ColorSizes.Dtos.ColorSizeDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "E_Shop.ColorSizes.IServices.IColorSizeAppService"
+            },
             "CreateAsyncByInput": {
               "uniqueName": "CreateAsyncByInput",
               "name": "CreateAsync",
@@ -2641,6 +2695,60 @@
               },
               "allowAnonymous": null,
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<E_Shop.ColorSizes.Dtos.ColorSizeDto,E_Shop.ColorSizes.Dtos.ColorSizeDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+            }
+          }
+        },
+        "E_Shop.Documents.DocumentAppService": {
+          "controllerName": "Document",
+          "controllerGroupName": "Document",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "E_Shop.Documents.DocumentAppService",
+          "interfaces": [
+            {
+              "type": "E_Shop.Documents.IServices.IDocumentAppService",
+              "name": "IDocumentAppService",
+              "methods": []
+            }
+          ],
+          "actions": {
+            "UploadByFiles": {
+              "uniqueName": "UploadByFiles",
+              "name": "Upload",
+              "httpMethod": "POST",
+              "url": "api/app/document/upload",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "files",
+                  "typeAsString": "System.Collections.Generic.List`1[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.List<Microsoft.AspNetCore.Http.IFormFile>",
+                  "typeSimple": "[Microsoft.AspNetCore.Http.IFormFile]",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "files",
+                  "name": "files",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.List<Microsoft.AspNetCore.Http.IFormFile>",
+                  "typeSimple": "[Microsoft.AspNetCore.Http.IFormFile]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Form",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<E_Shop.Documents.Dtos.DocumentDto>",
+                "typeSimple": "[E_Shop.Documents.Dtos.DocumentDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "E_Shop.Documents.DocumentAppService"
             }
           }
         },
@@ -8001,6 +8109,51 @@
           "jsonName": null,
           "type": "System.Boolean",
           "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "E_Shop.Documents.Dtos.DocumentDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FileSize",
+          "jsonName": null,
+          "type": "System.Int64",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FileUrl",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "MimeType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
