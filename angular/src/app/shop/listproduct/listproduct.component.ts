@@ -68,6 +68,10 @@ export class ListproductComponent implements OnInit {
 
   size = sizeOptions;
 
+  colorProduct : string[]= [];
+
+  sizeProduct : number[] = [];
+
 
    ngOnInit(): void {
     this.getcategories();
@@ -93,11 +97,22 @@ export class ListproductComponent implements OnInit {
       maxResultCount: 10,
       SkipCount : 0
     };
-
     this.colorService.getList(input).subscribe({
       next: (res) => {
         this.colors = res.items 
-        console.log(this.colors)
+        this.colors.forEach((item) => {
+          if(this.colorProduct.includes(item.color)){
+            return;
+          }
+          this.colorProduct.push(item.color)
+        })
+        this.colors.forEach((item) => {
+          if(this.sizeProduct.includes(item.size)){
+            return;
+          }
+          this.sizeProduct.push(item.size)
+          this.sizeProduct.sort((a,b) => a-b)
+        })
       }
     })
   }
@@ -172,6 +187,10 @@ export class ListproductComponent implements OnInit {
         this.attributes = res.items
       }
     })
+  }
+
+  getSize(size: number){
+    return this.size.find(x => x.value == size).key;
   }
 
 

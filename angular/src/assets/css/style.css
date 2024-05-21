@@ -1315,19 +1315,19 @@ ol {
 	cursor: pointer;
 }
 
-.shop__sidebar__color label.c-1 {
+.shop__sidebar__color label.black {
 	background: #0b090c;
 }
 
-.shop__sidebar__color label.c-2 {
+.shop__sidebar__color label.blue {
 	background: #20315f;
 }
 
-.shop__sidebar__color label.c-3 {
+.shop__sidebar__color label.orange {
 	background: #f1af4d;
 }
 
-.shop__sidebar__color label.c-4 {
+.shop__sidebar__color label.gray {
 	background: #636068;
 }
 
@@ -1335,19 +1335,19 @@ ol {
 	background: #57594d;
 }
 
-.shop__sidebar__color label.c-6 {
+.shop__sidebar__color label.pink {
 	background: #e8bac4;
 }
 
-.shop__sidebar__color label.c-7 {
-	background: #d6c1d7;
+.shop__sidebar__color label.yellow {
+	background: #eaff00;
 }
 
-.shop__sidebar__color label.c-8 {
+.shop__sidebar__color label.red {
 	background: #ed1c24;
 }
 
-.shop__sidebar__color label.c-9 {
+.shop__sidebar__color label.white {
 	background: #ffffff;
 }
 
