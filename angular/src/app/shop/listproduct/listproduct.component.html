@@ -172,18 +172,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let item of [2,3,4,5,6,7,8,9,10]">
+                        <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let item of allProducts">
                             <div class="product__item"> 
-                                <div class="product__item__pic set-bg" style="background: url(assets/img/product/product-{{item}}.jpg);" >
+                                <div class="product__item__pic set-bg" style="background: url(assets/img/product/product-2.jpg);" >
                                     <ul class="product__hover">
                                         <li><a href="#"><img src="assets/img/icon/heart.png" alt=""></a></li>
                                         <li><a href="#"><img src="assets/img/icon/compare.png" alt=""> <span>Compare</span></a>
                                         </li>
-                                        <li><a href="#"><img src="assets/img/icon/search.png" alt=""></a></li>
+                                        <li><a [routerLink]="['../product', item.id]"><img src="assets/img/icon/search.png" alt=""></a></li>
                                     </ul>
                                 </div>
+                                
                                 <div class="product__item__text">
-                                    <h6>Piqué Biker Jacket</h6>
+                                    <h6 *ngFor="let attribute of item.attributes"><span *ngIf="attribute.attributeName == 'Name'">{{attribute.value}}</span></h6>
                                     <a href="#" class="add-cart">+ Add To Cart</a>
                                     <div class="rating">
                                         <i class="fa fa-star-o"></i>
@@ -192,17 +193,18 @@
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                     </div>
-                                    <h5>$67.24</h5>
+                                    <h5>{{item.price}} $</h5>
                                     <div class="product__color__select">
-                                        <label for="pc-4">
+                                        <label for="pc-4" *ngFor="let color of item.color" >
                                             <input type="radio" id="pc-4">
+                                            {{color.color}}
                                         </label>
-                                        <label class="active black" for="pc-5">
+                                        <!-- <label class="active black" for="pc-5">
                                             <input type="radio" id="pc-5">
                                         </label>
                                         <label class="grey" for="pc-6">
                                             <input type="radio" id="pc-6">
-                                        </label>
+                                        </label> -->
                                     </div>
                                 </div>
                             </div>

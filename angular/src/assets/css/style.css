@@ -1714,24 +1714,27 @@ ol {
 	cursor: pointer;
 }
 
-.product__details__option__color label.c-1 {
+.product__details__option__color label.black {
 	background: #0b090c;
 }
 
-.product__details__option__color label.c-2 {
+.product__details__option__color label.blue {
 	background: #20315f;
 }
 
-.product__details__option__color label.c-3 {
+.product__details__option__color label.orange {
 	background: #f1af4d;
 }
 
-.product__details__option__color label.c-4 {
+.product__details__option__color label.red {
 	background: #ed1c24;
 }
 
-.product__details__option__color label.c-9 {
+.product__details__option__color label.white {
 	background: #ffffff;
+}
+.product__details__option__color label.yellow {
+	background: #fff700;
 }
 
 .product__details__option__color label:after {

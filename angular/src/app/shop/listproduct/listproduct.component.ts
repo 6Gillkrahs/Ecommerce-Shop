@@ -8,6 +8,31 @@ import { sizeOptions } from '@proxy/sizes'
 import { ProductDto } from '@proxy/products/dtos'
 import { ProductService } from '@proxy/products'
 import { PagedAndSortedResultRequestDto } from '@abp/ng.core';
+import { ProductAttributeDto } from "@proxy/attributes/dtos";
+import { ProductAttributeService } from "@proxy/attributes";
+import { AttributeDto } from "@proxy/attributes/dtos";
+import { AttributeService } from "@proxy/attributes";
+import { ColorSizeDto } from "@proxy/color-sizes/dtos";
+import {ColorSizeService } from "@proxy/color-sizes";
+
+
+
+interface Product {
+  id: string,
+  price: string,
+  attributes: { 
+    id: string; 
+    attributeName: string;
+     value: string 
+  }[] ,
+}
+
+interface Arr{
+  id: string;
+  name:string;
+  value : string;
+}
+
 
 @Component({
   selector: 'app-listproduct',
@@ -20,6 +45,14 @@ export class ListproductComponent implements OnInit {
   manufacturers: ManufacturerDto[] = [];
 
   products: ProductDto[] = [];
+
+  attributes : AttributeDto[] = [];
+
+  productAttributes : ProductAttributeDto[] = [];
+
+  allProducts : Product[] = [];
+
+  colors : ColorSizeDto[] = [];
 
   inputCategory: CategoryGetListInput;
 
@@ -36,18 +69,37 @@ export class ListproductComponent implements OnInit {
   size = sizeOptions;
 
 
-
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.getcategories();
     this.getManufacturer();
+    this.getProducts();
+    this.getColors();
   }
 
   constructor(
     private readonly categoryService: CategoryService,
     private readonly manufacturerService: ManufacturerService,
     private readonly productService: ProductService,
+    private readonly productAttributeService : ProductAttributeService,
+    private readonly attributeService : AttributeService,
+    private readonly colorService : ColorSizeService
+
   ) {
 
+  }
+
+  getColors(){
+    const input = {
+      maxResultCount: 10,
+      SkipCount : 0
+    };
+
+    this.colorService.getList(input).subscribe({
+      next: (res) => {
+        this.colors = res.items 
+        console.log(this.colors)
+      }
+    })
   }
 
   getcategories() {
@@ -86,8 +138,60 @@ export class ListproductComponent implements OnInit {
       next: (product) => {
         this.products = product.items
         this.totalCount = product.totalCount;
+        this.getProductAttributes()
       }
     })
+    
+  }
+
+
+  getProductAttributes(){
+    const input = {
+      maxResultCount: 10,
+      SkipCount : 0
+    };
+    
+    this.productAttributeService.getList(input).subscribe({
+      next : (res) => {
+        this.productAttributes = res.items
+        this.getall()
+        
+      }
+    })
+  }
+  
+
+  getAttributes(){
+    const input = {
+      maxResultCount: 10,
+      SkipCount : 0
+    };
+    
+    this.attributeService.getList(input).subscribe({
+      next : (res) => {
+        this.attributes = res.items
+      }
+    })
+  }
+
+
+
+  getall(){    
+    for (const product of this.products) {
+      const productAttributes = this.productAttributes.filter(
+        (pa) => pa.productId === product.id
+      ).map((pa) => ({
+        id: pa.id,
+        attributeName: pa.attributeName,
+        value: pa.value,
+      }));
+      this.allProducts.push({
+        id: product.id,
+        price: "20", 
+        attributes: productAttributes,
+      });
+    }
+    console.log(this.allProducts)
   }
 
 
