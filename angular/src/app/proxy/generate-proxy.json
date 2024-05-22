@@ -3087,13 +3087,13 @@
               "name": "IProductImageService",
               "methods": [
                 {
-                  "name": "SaveBytesAsync",
+                  "name": "SaveAsync",
                   "parametersOnMethod": [
                     {
-                      "name": "files",
-                      "typeAsString": "System.Collections.Generic.List`1[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]], System.Private.CoreLib",
-                      "type": "System.Collections.Generic.List<Microsoft.AspNetCore.Http.IFormFile>",
-                      "typeSimple": "[Microsoft.AspNetCore.Http.IFormFile]",
+                      "name": "remoteStreams",
+                      "typeAsString": "System.Collections.Generic.IEnumerable`1[[Volo.Abp.Content.IRemoteStreamContent, Volo.Abp.Core, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "type": "System.Collections.Generic.IEnumerable<Volo.Abp.Content.IRemoteStreamContent>",
+                      "typeSimple": "[Volo.Abp.Content.IRemoteStreamContent]",
                       "isOptional": false,
                       "defaultValue": null
                     },
@@ -3107,25 +3107,42 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "System.Void",
-                    "typeSimple": "System.Void"
+                    "type": "System.Collections.Generic.IEnumerable<System.String>",
+                    "typeSimple": "[string]"
+                  }
+                },
+                {
+                  "name": "GetBytesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "productId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Microsoft.AspNetCore.Mvc.FileResult",
+                    "typeSimple": "Microsoft.AspNetCore.Mvc.FileResult"
                   }
                 }
               ]
             }
           ],
           "actions": {
-            "GetBytesAsyncByName": {
-              "uniqueName": "GetBytesAsyncByName",
+            "GetBytesAsyncByProductId": {
+              "uniqueName": "GetBytesAsyncByProductId",
               "name": "GetBytesAsync",
               "httpMethod": "GET",
-              "url": "api/app/product-image/bytes",
+              "url": "api/app/product-image/bytes/{productId}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "name",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
+                  "name": "productId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null
@@ -3133,37 +3150,37 @@
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "name",
-                  "name": "name",
+                  "nameOnMethod": "productId",
+                  "name": "productId",
                   "jsonName": null,
-                  "type": "System.String",
+                  "type": "System.Guid",
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
                 }
               ],
               "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
+                "type": "Microsoft.AspNetCore.Mvc.FileResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.FileResult"
               },
               "allowAnonymous": null,
-              "implementFrom": "E_Shop.ProductImages.ProductImageAppService"
+              "implementFrom": "E_Shop.ProductImages.IServices.IProductImageService"
             },
-            "SaveBytesAsyncByFilesAndProductId": {
-              "uniqueName": "SaveBytesAsyncByFilesAndProductId",
-              "name": "SaveBytesAsync",
+            "SaveAsyncByRemoteStreamsAndProductId": {
+              "uniqueName": "SaveAsyncByRemoteStreamsAndProductId",
+              "name": "SaveAsync",
               "httpMethod": "POST",
-              "url": "api/app/product-image/save-bytes/{productId}",
+              "url": "api/app/product-image/save/{productId}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "files",
-                  "typeAsString": "System.Collections.Generic.List`1[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.List<Microsoft.AspNetCore.Http.IFormFile>",
-                  "typeSimple": "[Microsoft.AspNetCore.Http.IFormFile]",
+                  "name": "remoteStreams",
+                  "typeAsString": "System.Collections.Generic.IEnumerable`1[[Volo.Abp.Content.IRemoteStreamContent, Volo.Abp.Core, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.IEnumerable<Volo.Abp.Content.IRemoteStreamContent>",
+                  "typeSimple": "[Volo.Abp.Content.IRemoteStreamContent]",
                   "isOptional": false,
                   "defaultValue": null
                 },
@@ -3178,15 +3195,15 @@
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "files",
-                  "name": "files",
+                  "nameOnMethod": "remoteStreams",
+                  "name": "remoteStreams",
                   "jsonName": null,
-                  "type": "System.Collections.Generic.List<Microsoft.AspNetCore.Http.IFormFile>",
-                  "typeSimple": "[Microsoft.AspNetCore.Http.IFormFile]",
+                  "type": "System.Collections.Generic.IEnumerable<Volo.Abp.Content.IRemoteStreamContent>",
+                  "typeSimple": "[Volo.Abp.Content.IRemoteStreamContent]",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
-                  "bindingSourceId": "Form",
+                  "bindingSourceId": "FormFile",
                   "descriptorName": ""
                 },
                 {
@@ -3203,8 +3220,8 @@
                 }
               ],
               "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
+                "type": "System.Collections.Generic.IEnumerable<System.String>",
+                "typeSimple": "[string]"
               },
               "allowAnonymous": null,
               "implementFrom": "E_Shop.ProductImages.IServices.IProductImageService"
@@ -8579,8 +8596,16 @@
       "genericArguments": null,
       "properties": null
     },
-    "Microsoft.AspNetCore.Http.IFormFile": {
+    "Microsoft.AspNetCore.Mvc.ActionResult": {
       "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": []
+    },
+    "Microsoft.AspNetCore.Mvc.FileResult": {
+      "baseType": "Microsoft.AspNetCore.Mvc.ActionResult",
       "isEnum": false,
       "enumNames": null,
       "enumValues": null,
@@ -8599,7 +8624,7 @@
           "regex": null
         },
         {
-          "name": "ContentDisposition",
+          "name": "FileDownloadName",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -8611,10 +8636,67 @@
           "regex": null
         },
         {
-          "name": "Headers",
+          "name": "LastModified",
           "jsonName": null,
-          "type": "{System.String:Microsoft.Extensions.Primitives.StringValues}",
-          "typeSimple": "{string:Microsoft.Extensions.Primitives.StringValues}",
+          "type": "System.DateTimeOffset?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "EntityTag",
+          "jsonName": null,
+          "type": "Microsoft.Net.Http.Headers.EntityTagHeaderValue",
+          "typeSimple": "Microsoft.Net.Http.Headers.EntityTagHeaderValue",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "EnableRangeProcessing",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Microsoft.Extensions.Primitives.StringSegment": {
+      "baseType": "System.ValueType",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Buffer",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Offset",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -8625,7 +8707,7 @@
         {
           "name": "Length",
           "jsonName": null,
-          "type": "System.Int64",
+          "type": "System.Int32",
           "typeSimple": "number",
           "isRequired": false,
           "minLength": null,
@@ -8635,7 +8717,7 @@
           "regex": null
         },
         {
-          "name": "Name",
+          "name": "Value",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -8647,10 +8729,67 @@
           "regex": null
         },
         {
-          "name": "FileName",
+          "name": "HasValue",
           "jsonName": null,
-          "type": "System.String",
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Item",
+          "jsonName": null,
+          "type": "System.Char",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Microsoft.Net.Http.Headers.EntityTagHeaderValue": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Any",
+          "jsonName": null,
+          "type": "Microsoft.Net.Http.Headers.EntityTagHeaderValue",
+          "typeSimple": "Microsoft.Net.Http.Headers.EntityTagHeaderValue",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Tag",
+          "jsonName": null,
+          "type": "Microsoft.Extensions.Primitives.StringSegment",
+          "typeSimple": "Microsoft.Extensions.Primitives.StringSegment",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "IsWeak",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -11282,6 +11421,51 @@
           "jsonName": null,
           "type": "System.Boolean",
           "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Volo.Abp.Content.IRemoteStreamContent": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FileName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ContentType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ContentLength",
+          "jsonName": null,
+          "type": "System.Int64?",
+          "typeSimple": "number?",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

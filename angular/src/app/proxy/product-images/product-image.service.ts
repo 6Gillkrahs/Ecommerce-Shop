@@ -1,6 +1,6 @@
 import { RestService, Rest } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { IFormFile } from '../microsoft/asp-net-core/http/models';
+import type { FileResult } from '../microsoft/asp-net-core/mvc/models';
 
 @Injectable({
   providedIn: 'root',
@@ -9,19 +9,19 @@ export class ProductImageService {
   apiName = 'Default';
   
 
-  getBytes = (name: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, void>({
+  getBytes = (productId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, FileResult>({
       method: 'GET',
-      url: '/api/app/product-image/bytes',
-      params: { name },
+      url: `/api/app/product-image/bytes/${productId}`,
     },
     { apiName: this.apiName,...config });
   
 
-  saveBytes = (files: IFormFile[], productId: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, void>({
+  save = (remoteStreams: IRemoteStreamContent[], productId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, string[]>({
       method: 'POST',
-      url: `/api/app/product-image/save-bytes/${productId}`,
+      url: `/api/app/product-image/save/${productId}`,
+      body: remoteStreams,
     },
     { apiName: this.apiName,...config });
 
