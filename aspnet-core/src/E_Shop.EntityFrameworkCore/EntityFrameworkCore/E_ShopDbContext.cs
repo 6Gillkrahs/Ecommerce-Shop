@@ -223,6 +223,7 @@ public class E_ShopDbContext :
             b.Property(x => x.Name).HasColumnName("PRODUCTIMAGE_NAME");
             b.Property(x => x.ProductId).HasColumnName("PRODUCTIMAGE_PRODUCTID");
             b.Property(x => x.Updateby).HasColumnName("PRODUCTIMAGE_UPDATEBY");
+            b.Property(x => x.MineType).HasColumnName("PRODUCTIMAGE_MINETYPE");
             b.Property(x => x.FileSize).HasColumnName("PRODUCTIMAGE_FILESIZE");
             b.HasOne(x => x.Product)
             .WithMany(p => p.productImages)
