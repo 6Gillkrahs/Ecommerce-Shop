@@ -11,6 +11,6 @@ namespace E_Shop.ProductImages.Dtos
         public Guid ProductId { get; set; }
         public string Updateby { get; set; }
         public string MineType { get; set; }
-        public long FileSize { get; set; }
+        public long? FileSize { get; set; }
     }
 }

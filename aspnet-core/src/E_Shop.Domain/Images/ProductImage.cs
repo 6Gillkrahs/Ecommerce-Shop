@@ -18,11 +18,11 @@ namespace E_Shop.Images
         public string  Updateby { get; set; }
 
         public string MineType { get; set; }
-        public long FileSize { get; set; }
+        public long? FileSize { get; set; }
 
         protected ProductImage() { }
 
-        public ProductImage(Guid id,string Name,Guid ProductId,string Updateby,string MineType ,long FileSize)
+        public ProductImage(Guid id,string Name,Guid ProductId,string Updateby,string MineType ,long? FileSize)
         {
             this.Id = id;
             this.Name = Name;
