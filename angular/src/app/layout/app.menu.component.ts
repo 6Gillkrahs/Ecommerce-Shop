@@ -27,7 +27,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Category', icon: 'pi pi-fw pi-list', routerLink: ['/category'] },
                     { label: 'Manufacturer', icon: 'pi pi-fw pi-briefcase', routerLink: ['/manufacturer'] },
                     { label: 'Product', icon: 'pi pi-fw pi-database', routerLink: ['/product'] },
-                    // { label: 'Button', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
+                    { label: 'Tags', icon: 'pi pi-fw pi-tags', routerLink: ['/tag'] },
                     // { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
                     // { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
                     // { label: 'Tree', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree'] },

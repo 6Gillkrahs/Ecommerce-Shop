@@ -47,6 +47,7 @@ const routes: Routes = [
         { path: 'product', 
         loadChildren: () => 
           import('./pages/product/product.module').then(m => m.ProductModule) },
+        { path: 'tag', loadChildren: () => import('./pages/tags/tags.module').then(m => m.TagsModule) },
 
 
       { path: 'emty', loadChildren: () => import('./layouts/emty/emty.module').then(m => m.EmtyModule) }
@@ -59,9 +60,13 @@ const routes: Routes = [
     children: [
       { path: 'home', loadChildren: () => import('./shop/home/home.module').then(m => m.HomeModule) },
       { path: 'list', loadChildren: () => import('./shop/listproduct/listproduct.module').then(m => m.ListproductModule) },
+      { path: 'cart', loadChildren: () => import('./shop/cart/cart.module').then(m => m.CartModule) },
       { path: 'product/:id', loadChildren: () => import('./shop/detail-product/detail-product.module').then(m => m.DetailProductModule) },  
     ]
   },
+
+  
+  
   
   
 ];

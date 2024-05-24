@@ -1,0 +1,70 @@
+<p-toast />
+<p-confirmDialog />
+<div class="card">
+  <p-table #dt1 [value]="tags" [tableStyle]="{ 'min-width': '250rem' }" styleClass="p-datatable-striped"
+    [paginator]="true" [rows]="5" [first]="skipCount" [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [(selection)]="selectedTags" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" [loading]="isLoading"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+    <ng-template pTemplate="caption">
+      <p-button pRipple  label="New" icon="pi pi-plus" class="mr-2" (click)="onAdd()" />
+      <p-button pRipple  label="Delete" icon="pi pi-trash" (click)="deleteSelectedTags()"
+        [disabled]="!selectedTags || !selectedTags.length" />
+      <div class="flex">
+        <p-iconField iconPosition="left" class="ml-auto">
+          <p-inputIcon>
+            <i class="pi pi-search"></i>
+          </p-inputIcon>
+          <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search keyword" />
+        </p-iconField>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 10%">
+          <p-tableHeaderCheckbox />
+        </th>
+        <th pSortableColumn="Label" style="width:35%">
+          Label <p-sortIcon field="Label" />
+        </th>
+        <th pSortableColumn="Slug" style="width:35%">
+          Slug <p-sortIcon field="Slug" />
+        </th>
+        <th style="width:15%">
+          Action
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tags>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="tags" />
+        </td>
+        <td>{{tags.label}}</td>
+        <td>{{tags.slug}}</td>
+        <td style="min-width: 15%;">
+          <app-cs-tiered-menu (buttonItem)="dropdownItemButton(tags)" [items]="itemAction"></app-cs-tiered-menu>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <div style="text-align:left">
+          <p-button icon="pi pi-refresh" styleClass="p-button-text" (click)="gettags()"/>
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-container *ngIf="showModel == true">
+  <app-showmodel
+    [visible]="showModel"
+    [Tags]="selectedTag"
+    (appClose)="showModel = false"
+    (tagsChanged)="gettags()"
+  >
+  </app-showmodel>
+</ng-container>
+
