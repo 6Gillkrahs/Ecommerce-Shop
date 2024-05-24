@@ -14,6 +14,11 @@ export interface CreateUpdateProduct {
   categoryId?: string;
 }
 
+export interface ManufacturerLookUpDto {
+  id?: string;
+  name?: string;
+}
+
 export interface ProductDto extends FullAuditedEntityDto<string> {
   manufacturerName?: string;
   manufacturerId?: string;
@@ -25,4 +30,10 @@ export interface ProductDto extends FullAuditedEntityDto<string> {
   isActive: boolean;
   categoryName?: string;
   categoryId?: string;
+}
+
+export interface TagLookUpDto {
+  id?: string;
+  label?: string;
+  slug?: string;
 }

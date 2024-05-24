@@ -1,0 +1,38 @@
+<p-dialog
+[(visible)]="visible"
+header="{{Tags.id ? 'Edit Tag' : 'Add Tags'}}"
+[modal]="true"  
+[style]="{ width: '50rem' }" 
+[breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+(onHide)="appClose.emit()"
+>
+    <form [formGroup]="formGroup" class="pb-5">
+        <div class="p-fluid grid pt-4">
+            <div class="p-field col-12 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="label"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Label<span class="required">*</span></label>
+                </span>
+            </div>
+            <div class="p-field col-12 lg:col-6">
+                <span class="p-float-label">
+                    <input id="float-input" type="text" pinputtext="" formControlName="slug"
+                        class="p-inputtext p-component p-element p-filled" required>
+                    <label for="float-input">Slug<span class="required">*</span></label>
+                </span>
+            </div>
+        </div>
+    </form>
+    <ng-template pTemplate="paginatorright">
+        <div class="flex justify-content-between gap-1">
+            <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+            <p-button 
+                label="{{Tags.id ? 'Update' : 'Save'}}" 
+                icon="pi pi-check" 
+                [loading]="isLoading" 
+                (onClick)="save()" />
+        </div>
+    </ng-template>
+    
+</p-dialog>

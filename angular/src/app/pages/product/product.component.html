@@ -84,3 +84,13 @@
   </app-add-sizeproduct>
 </ng-container>
 
+
+<ng-container *ngIf="addTagModal == true">
+  <app-add-tag
+    [visible]="addTagModal"
+    [product]="selectedProduct"
+    (appClose)="addTagModal = false"
+  >
+
+  </app-add-tag>
+</ng-container>

@@ -1,4 +1,4 @@
-import type { CategoryLookupDto, CreateUpdateProduct, ProductDto } from './dtos/models';
+import type { CategoryLookupDto, CreateUpdateProduct, ManufacturerLookUpDto, ProductDto, TagLookUpDto } from './dtos/models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { ListResultDto, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -65,6 +65,22 @@ export class ProductService {
     this.restService.request<any, ListResultDto<CategoryLookupDto>>({
       method: 'GET',
       url: '/api/app/product/get-category-lookup',
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getManufacturerLookup = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ListResultDto<ManufacturerLookUpDto>>({
+      method: 'GET',
+      url: '/api/app/product/get-manufacturer-lookup',
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getTagLookup = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ListResultDto<TagLookUpDto>>({
+      method: 'GET',
+      url: '/api/app/product/get-tag-lookup',
     },
     { apiName: this.apiName,...config });
 

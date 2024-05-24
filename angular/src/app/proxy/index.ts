@@ -7,6 +7,7 @@ import * as Microsoft from './microsoft';
 import * as ProductImages from './product-images';
 import * as Products from './products';
 import * as Sizes from './sizes';
+import * as Tags from './tags';
 import * as UserManageMent from './user-manage-ment';
 import * as Volo from './volo';
-export { Attributes, Categories, ColorSizes, ECommerceShop, Manufacturers, Microsoft, ProductImages, Products, Sizes, UserManageMent, Volo };
+export { Attributes, Categories, ColorSizes, ECommerceShop, Manufacturers, Microsoft, ProductImages, Products, Sizes, Tags, UserManageMent, Volo };
