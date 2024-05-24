@@ -191,7 +191,7 @@ public class E_ShopDbContext :
         builder.Entity<ProductTag>(b =>
         {
             b.ToTable(E_ShopConsts.DbTablePrefix + "ProductTag", E_ShopConsts.DbSchema);
-            b.HasNoKey();
+            b.Property(x => x.Id).HasColumnName("PRODUCTTAG_ID");
             b.Property(x => x.ProductId).HasColumnName("PRODUCTTAG_PRODUCTID");
             b.Property(x => x.TagId).HasColumnName("PRODUCTTAG_TAGID");
             b.ConfigureByConvention();

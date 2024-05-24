@@ -13,6 +13,8 @@ using E_Shop.ProductImages.Dtos;
 using E_Shop.Products;
 using E_Shop.Products.Dtos;
 using E_Shop.Reviews;
+using E_Shop.Tags;
+using E_Shop.Tags.Dtos;
 
 
 namespace E_Shop;
@@ -41,8 +43,9 @@ public class E_ShopApplicationAutoMapperProfile : Profile
         CreateMap<Product, ProductDto>().ReverseMap();
         CreateMap<CreateUpdateProduct, Product>().ReverseMap();
         CreateMap<Category, CategoryLookupDto>().ReverseMap();
+        CreateMap<Tag, TagLookUpDto>().ReverseMap();
+        CreateMap<Manufacturer, ManufacturerLookUpDto>().ReverseMap();
 
-       
         CreateMap<ProductAttribute, ProductAttributeDto>().ReverseMap();
         CreateMap<CreateProductAttribute, ProductAttribute>().ReverseMap();
         CreateMap<UpdateProductAttributeDto, ProductAttribute>().ReverseMap();
@@ -56,7 +59,13 @@ public class E_ShopApplicationAutoMapperProfile : Profile
         CreateMap<ColorSize,ColorSizeDto>().ReverseMap();
         CreateMap<CreateColorSizeDto, ColorSize>().ReverseMap();
 
+        CreateMap<Tag, TagDto>().ReverseMap();
+        CreateMap<CreateUpdateTagDto,Tag>().ReverseMap();
 
+        CreateMap<CreateUpdateProductTagDto, ProductTag>().ReverseMap();
+        CreateMap<ProductTag, ProductTagDto>().ReverseMap();
+
+       
 
     }
 }

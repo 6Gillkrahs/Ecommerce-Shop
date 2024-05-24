@@ -1,4 +1,5 @@
 ﻿using E_Shop.Products.Dtos;
+using E_Shop.Tags.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,8 @@ namespace E_Shop.Products.IServices
     {
         Task<PagedResultDto<ProductDto>> getAllByManufacturerId(Guid manufacturerId);
         Task<ListResultDto<CategoryLookupDto>> getCategoryLookupAsync();
+        Task<ListResultDto<TagLookUpDto>> getTagLookupAsync();
+        Task<ListResultDto<ManufacturerLookUpDto>> getManufacturerLookupAsync();
 
     }
 }

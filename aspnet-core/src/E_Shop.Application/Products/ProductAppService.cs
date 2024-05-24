@@ -5,8 +5,11 @@ using E_Shop.Manufacturers;
 using E_Shop.ProductImages.Dtos;
 using E_Shop.Products.Dtos;
 using E_Shop.Products.IServices;
+using E_Shop.Tags;
+using E_Shop.Tags.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Minio.DataModel.Tags;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,18 +29,22 @@ namespace E_Shop.Products
         private readonly IRepository<Product,Guid>  _productRepository;
         private readonly IRepository<Manufacturer,Guid> _manufacturerRepository;
         private readonly IRepository<Category,Guid> _categoryRepository;
-
+        private readonly IRepository<Tags.Tag, Guid> _tagRepository;
+        private readonly IRepository<ProductTag, Guid> _productTagRepository;
 
         public ProductAppService(
             IRepository<Product, Guid> repository, 
             IRepository<Manufacturer, Guid> _manufacturerRepository, 
-            IRepository<Category, Guid> _categoryRepository
+            IRepository<Category, Guid> _categoryRepository,
+            IRepository<Tags.Tag, Guid> _tagRepository,
+            IRepository<ProductTag, Guid> _productTagRepository
             ) : base(repository)
         {
             _productRepository = repository;
             this._manufacturerRepository = _manufacturerRepository; 
             this._categoryRepository = _categoryRepository;
-            
+            this._tagRepository = _tagRepository;
+            this._productTagRepository = _productTagRepository;
         }
 
         public override async Task<ProductDto> CreateAsync(CreateUpdateProduct input)
@@ -120,10 +127,20 @@ namespace E_Shop.Products
         );
         }
 
+        public async Task<ListResultDto<ManufacturerLookUpDto>> getManufacturerLookupAsync()
+        {
+            var manufacturers = await _manufacturerRepository.GetListAsync();
+            var manufacturerLookups = ObjectMapper.Map<List<Manufacturer>, List<ManufacturerLookUpDto>>(manufacturers);
+            return new ListResultDto<ManufacturerLookUpDto>(manufacturerLookups);
+        }
 
-       
+      
 
-
-
+        public async Task<ListResultDto<TagLookUpDto>> getTagLookupAsync()
+        {
+            var tags = await _tagRepository.GetListAsync();       
+            var tagLookups = ObjectMapper.Map<List<Tags.Tag>,List<TagLookUpDto>>(tags);       
+            return new ListResultDto<TagLookUpDto>(tagLookups);
+        }
     }
 }
