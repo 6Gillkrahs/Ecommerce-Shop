@@ -4,6 +4,8 @@ import { ProductService } from '@proxy/products'
 import { ProductAttributeDto } from '@proxy/attributes/dtos'
 import { ProductAttributeService } from '@proxy/attributes'
 import { PagedAndSortedResultRequestDto } from '@abp/ng.core';
+import { ProductTagService } from '@proxy/tags';
+import { TagDto } from '@proxy/tags/dtos';
 
 
 @Component({
@@ -31,14 +33,18 @@ export class DetailProComponent implements OnInit{
 
   totalCount : number;
 
+  tags : TagDto[] = [];
+
   ngOnInit(): void {
     this.getProductAttribute();
+    this.gettags()
     console.log()
   }
 
   constructor(
     private productService : ProductService,
-    private readonly productAttributeService: ProductAttributeService
+    private readonly productAttributeService: ProductAttributeService,
+    private readonly productTagService: ProductTagService
   ) {
     
   }
@@ -54,6 +60,14 @@ export class DetailProComponent implements OnInit{
         this.productAttributes = productAttribute.items
         this.totalCount = productAttribute.totalCount
         console.log(this.productAttributes)
+      }
+    })
+  }
+
+  gettags(){
+    this.productTagService.getProductTagsByProductId(this.product.id).subscribe({
+      next: (tags) => {
+        this.tags = tags.items
       }
     })
   }

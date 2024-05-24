@@ -26,10 +26,22 @@
             </div>
             <div class="p-field pt-4 col-12 lg:col-6">
                 <p-floatLabel>
-                    <p-dropdown [options]="manufacturers" formControlName="manufacturerId" optionLabel="name"
+                    <p-dropdown [options]="manufacturerLookUp" formControlName="manufacturerId" optionLabel="name"
                         inputId="float-label" optionValue="id" />
                     <label for="float-label">Select a Manufacturer<span class="required">*</span></label>
                 </p-floatLabel>
+            </div>
+            <div class="p-field pt-4 col-12 lg:col-6">
+                <p-floatLabel>
+                    <p-multiSelect 
+                        inputId="float-label" 
+                        [options]="tagLookup" 
+                        formControlName="tag"
+                        optionLabel="label"
+                        optionValue="id" />
+                    <label for="float-label">Select Tags</label>
+                </p-floatLabel>
+                
             </div>
             <div class="p-field col-12 pt-4 lg:col-12">
                 <span class="p-float-label">
@@ -38,6 +50,14 @@
                     <label for="float-input">Description<span class="required">*</span></label>
                 </span>
             </div>
+            
+            <div class="p-field col-12 pt-4 lg:col-12">
+                <p-fileUpload name="file" mode="basic" 
+                    maxFileSize="1000000" chooseLabel="Choose" uploadLabel="Upload" cancelLabel="Cancel"
+                    customUpload="true" (uploadHandler)="onUpload($event)" [auto]="true"/>  
+                
+            </div>
+
         </div>
     </form>
     <ng-template pTemplate="paginatorright">
@@ -46,33 +66,8 @@
             <p-button label="Save" icon="pi pi-check" [loading]="isLoading" (onClick)="save()" />
         </div>
     </ng-template>
+
+  
 </p-dialog>
 
 
-<!-- <div class="p-field col-12 pt-4 lg:col-6">
-    <span class="p-float-label">
-        <input id="float-input" type="text" pinputtext="" formControlName="size"
-            class="p-inputtext p-component p-element p-filled" required>
-        <label for="float-input">Size<span class="required">*</span></label>
-    </span>
-</div>
-<div class="p-field col-12 pt-4 lg:col-6">
-    <span class="p-float-label">
-        <input id="float-input" type="text" pinputtext="" formControlName="color"
-            class="p-inputtext p-component p-element p-filled" required>
-        <label for="float-input">Color<span class="required">*</span></label>
-    </span>
-</div>
-<div class="p-field col-12 pt-4 lg:col-6">
-    <span class="p-float-label">
-        <p-inputNumber inputId="integeronly" formControlName="quantity" />
-        <label for="number-input">Quantity<span class="required">*</span></label>
-    </span>
-</div>
-<div class="p-field col-12 pt-4 lg:col-6">
-    <span class="p-float-label">
-        <p-inputNumber formControlName="price" inputId="currency-us" mode="currency" currency="VND"
-            locale="vi-VN" />
-        <label for="number-input">Price<span class="required">*</span></label>
-    </span>
-</div> -->

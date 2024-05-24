@@ -44,6 +44,8 @@ export class ProductComponent implements OnInit {
 
   addSizeModel : boolean = false;
 
+  addTagModal : boolean = false;
+
   selectedProduct : ProductDto;
 
 
@@ -97,6 +99,13 @@ export class ProductComponent implements OnInit {
         }
       },
       {
+        label: "Add Tags",
+        icon: "pi pi-tags",
+        command : () => {
+          this.openaddTags(product)
+        }
+      },
+      {
         label: 'Edit',
         icon: 'pi pi-id-card',
         command: () => {
@@ -116,6 +125,11 @@ export class ProductComponent implements OnInit {
 
   openNew(){
     this.addModel = true;
+  }
+
+  openaddTags(product: ProductDto){
+    this.addTagModal = true;
+    this.selectedProduct = product;
   }
 
   openadd(product : ProductDto){

@@ -25,7 +25,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { AddSizeproductComponent } from './add-sizeproduct/add-sizeproduct.component';
-
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,8 @@ import { AddSizeproductComponent } from './add-sizeproduct/add-sizeproduct.compo
     CascadeSelectModule,
     DropdownModule,
     FileUploadModule,
-    InputNumberModule
+    InputNumberModule,
+    MultiSelectModule
   ]
 })
 export class ProductModule { }
